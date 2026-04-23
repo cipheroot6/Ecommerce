@@ -47,6 +47,7 @@ AGENTS.md
 TODO.md
 ERRORS.md
 MEMORY.md
+.agents
 
 # clerk configuration (can include secrets)
 /.clerk/

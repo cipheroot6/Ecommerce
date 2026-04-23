@@ -23,7 +23,7 @@ import {
 } from "@/components/ui/select";
 import { subjects } from "@/constants";
 import { Textarea } from "@/components/ui/textarea";
-// import { createCompanion } from "@/lib/actions/companion.actions";
+import { createCompanion } from "@/lib/actions/companion.action";
 import { redirect } from "next/navigation";
 
 const formSchema = z.object({
@@ -49,7 +49,13 @@ const CompanionForm = () => {
   });
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
-    console.log(values);
+    const companion = await createCompanion(values);
+    if (!companion) {
+      redirect(`/companions/${companion.id}`);
+    } else {
+      console.log("Something went wrong");
+      redirect("/");
+    }
   };
 
   return (
