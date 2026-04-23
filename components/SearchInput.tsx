@@ -26,7 +26,7 @@ const SearchInput = () => {
         router.push(newurl, {
           scroll: false,
         });
-      } else {
+      } else if (query) {
         router.push(pathname, {
           scroll: false,
         });
@@ -34,7 +34,7 @@ const SearchInput = () => {
     }, 600);
 
     return () => clearTimeout(delayDebounceFn);
-  }, [searchQuery, router, pathname, searchParams]);
+  }, [searchQuery, router, pathname]);
 
   return (
     <div className="relative border black-border rounded-lg items-center flex gap-4 px-2 py-1 h-fit">

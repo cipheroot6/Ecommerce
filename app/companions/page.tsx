@@ -3,6 +3,7 @@ import CompanionCards from "@/components/CompanionCards";
 import { getSubjectColor } from "@/lib/utils";
 import SearchInput from "@/components/SearchInput";
 import SubjectFilter from "@/components/SubjectFilter";
+export const unstable_instant = { prefetch: 'static' }
 
 const CompanionsLiberary = async ({ searchParams }: SearchParams) => {
   const filters = await searchParams;
