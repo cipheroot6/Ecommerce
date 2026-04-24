@@ -6,14 +6,14 @@ import SearchInput from "@/components/SearchInput";
 import SubjectFilter from "@/components/SubjectFilter";
 
 export const unstable_instant = {
-  prefetch: 'runtime',
+  prefetch: "runtime",
   samples: [
     { searchParams: { subject: null, topic: null } },
-    { searchParams: { subject: 'maths', topic: null } },
-    { searchParams: { subject: null, topic: 'algebra' } },
-    { searchParams: { subject: 'maths', topic: 'algebra' } }
-  ]
-}
+    { searchParams: { subject: "maths", topic: null } },
+    { searchParams: { subject: null, topic: "algebra" } },
+    { searchParams: { subject: "maths", topic: "algebra" } },
+  ],
+};
 
 async function CompanionGrid({
   searchParams,
@@ -21,8 +21,8 @@ async function CompanionGrid({
   searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
 }) {
   const filters = await searchParams;
-  const subject = filters.subject ? String(filters.subject) : '';
-  const topic = filters.topic ? String(filters.topic) : '';
+  const subject = filters.subject ? String(filters.subject) : "";
+  const topic = filters.topic ? String(filters.topic) : "";
   const companions = await getAllCompanions({ subject, topic });
 
   return (
@@ -41,13 +41,13 @@ async function CompanionGrid({
 const CompanionsLibrary = ({ searchParams }: SearchParams) => {
   return (
     <main>
-      <section className="flex justify-center gap-4 max-sm:flex-col">
+      <section className="flex gap-4 flex-col">
         <h1>Companion Library</h1>
         <div className="flex gap-4">
           <Suspense fallback={null}>
             <SearchInput />
+            <SubjectFilter />
           </Suspense>
-          <SubjectFilter />
         </div>
       </section>
       <Suspense fallback={<p>Loading companions...</p>}>
