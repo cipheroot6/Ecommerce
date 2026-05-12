@@ -18,22 +18,6 @@ const Page = () => {
           duration={45}
           color="#E5D0FF"
         />
-        <CompanionCards
-          id="2"
-          name="Countsy the Number Wizard"
-          topic="Derivative and Integral"
-          subject="Maths"
-          duration={30}
-          color="#FFDA6E"
-        />
-        <CompanionCards
-          id="3"
-          name="Verba the Verbal Builder"
-          topic="English Literature"
-          subject="Language"
-          duration={30}
-          color="#BDE7FF"
-        />
       </section>
       <section className="home-section">
         <CompanionList

@@ -15,6 +15,7 @@ import { getCompanion } from "@/lib/actions/companion.action";
 import { currentUser } from "@clerk/nextjs/server";
 import { getSubjectColor } from "@/lib/utils";
 import Image from "next/image";
+import CompanionComponent from "@/components/CompanionComponent";
 // import CompanionComponent from "@/components/CompanionComponent"; // your actual UI
 
 interface Props {
@@ -48,6 +49,8 @@ async function CompanionSession({
   if (!user) redirect("/sign-in");
   if (!companion) redirect("/companions");
 
+const { name, topic, subject, duration } = companion;
+
   return (
     <>
       <article className="flex justify-between items-center rounded-border p-6 max-md:flex-col">
@@ -76,6 +79,11 @@ async function CompanionSession({
           <p className="text-2xl">{companion.duration} min</p>
         </div>
       </article>
+      <CompanionComponent 
+      {...companion} 
+      companionId={id}
+      userName={user.firstName!}
+      userImage={user.imageUrl!}/>
     </>
   );
 }
