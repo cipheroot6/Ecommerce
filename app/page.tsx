@@ -1,33 +1,50 @@
-import React from "react";
+export const unstable_instant = { prefetch: 'static' };
+
+import React, { Suspense } from "react";
 import { Button } from "@/components/ui/button";
 import CompanionCards from "@/components/CompanionCards";
 import CompanionList from "@/components/CompanionList";
 import CTA from "@/components/CTA";
-import { recentSessions } from "@/constants/index";
+import { getSubjectColor } from "@/lib/utils";
+import { getAllCompanions, getRecentSessions } from "@/lib/actions/companion.action";
 
-const Page = () => {
+const HomeContent = async () => {
+  const companions = await getAllCompanions({ limit: 3});
+  const recentCompanions = await getRecentSessions({ limit: 10 });
+  
   return (
     <main>
       <h1 className="text-5xl font-bold">Popular Companions</h1>
       <section className="home-section">
-        <CompanionCards
-          id="1"
-          name="Neura the Brainy Explorer"
-          topic="Neural Network of the Brain"
-          subject="Science"
-          duration={45}
-          color="#E5D0FF"
-        />
+        {companions.map((companion: any) => (
+          <CompanionCards
+            key={companion.id}
+            id={companion.id}
+            name={companion.name}
+            topic={companion.topic}
+            subject={companion.subject}
+            duration={companion.duration}
+            color={getSubjectColor(companion.subject)}
+          />
+        ))}
       </section>
       <section className="home-section">
         <CompanionList
           title="Recently Completed Sessions"
-          companions={recentSessions}
+          companions={recentCompanions}
           classNames="w-2/3 max-lg:w-full"
         />
         <CTA />
       </section>
     </main>
+  );
+};
+
+const Page = () => {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <HomeContent />
+    </Suspense>
   );
 };
 
