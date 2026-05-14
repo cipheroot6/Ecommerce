@@ -33,6 +33,7 @@ const ProfileContent = async () => {
             alt={user.firstName!}
             width={110}
             height={110}
+            loading="eager"
           />
           <div className="flex flex-col gap-2">
             <h1 className="font-bold text-2xl">
@@ -58,7 +59,7 @@ const ProfileContent = async () => {
           </div>
           <div className="border border-black rouded-lg p-3 gap-2 flex flex-col h-fit">
             <div className="flex gap-2 items-center">
-              <Image src="/icons/cap.svg" alt="cap" width={22} height={22} />
+              <Image src="/icons/cap.svg" alt="cap" width={22} height={22} style={{ width: 'auto', height: 'auto' }} />
               <p className="text-2xl font-bold">{companions.length}</p>
             </div>
             <div>Companions created</div>

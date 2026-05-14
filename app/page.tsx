@@ -8,6 +8,14 @@ import CTA from "@/components/CTA";
 import { getSubjectColor } from "@/lib/utils";
 import { getAllCompanions, getRecentSessions } from "@/lib/actions/companion.action";
 
+type CompanionData = {
+  id: string;
+  name: string;
+  topic: string;
+  subject: string;
+  duration: number;
+};
+
 const HomeContent = async () => {
   const companions = await getAllCompanions({ limit: 3});
   const recentCompanions = await getRecentSessions({ limit: 10 });
@@ -16,7 +24,7 @@ const HomeContent = async () => {
     <main>
       <h1 className="text-5xl font-bold">Popular Companions</h1>
       <section className="home-section">
-        {companions.map((companion: any) => (
+        {companions.map((companion: CompanionData) => (
           <CompanionCards
             key={companion.id}
             id={companion.id}

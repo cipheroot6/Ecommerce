@@ -30,17 +30,17 @@ const CompanionComponent = ({ companionId, subject, topic, name, userName, userI
 
     const vapiRef = useRef<InstanceType<typeof Vapi> | null>(null);
     const lottieRef = useRef<LottieRefCurrentProps>(null);
-    const [mounted, setMounted] = useState(false);
     const [demoSecondsUsed, setDemoSecondsUsed] = useState(DEMO_LIMIT_SECONDS); // start maxed out until loaded
     const callStartRef = useRef<number | null>(null);
 
     // Load saved key from localStorage on mount
     useEffect(() => {
-        setMounted(true);
         const saved = localStorage.getItem(LS_KEY);
         if (saved) {
-            setKeyInput(saved);
-            setUsingOwnKey(true);
+            queueMicrotask(() => {
+                setKeyInput(saved);
+                setUsingOwnKey(true);
+            });
         }
         getUserUsage().then(setDemoSecondsUsed);
     }, []);
@@ -163,7 +163,7 @@ const CompanionComponent = ({ companionId, subject, topic, name, userName, userI
     return (
         <section className="flex flex-col h-[70vh]">
             {/* Key selection modal — rendered into body via portal to escape stacking context */}
-            {showKeyModal && mounted && createPortal(
+            {showKeyModal && createPortal(
                 <div className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/50">
                     <div className="bg-white rounded-xl shadow-xl p-6 w-full max-w-md flex flex-col gap-4 mx-4">
                         <h2 className="font-bold text-xl text-black">Choose how to start</h2>
